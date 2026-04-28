@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mãe que Se Vira — Organização Financeira</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --verde: #1a3a2a;
+    --verde-medio: #2d5a3d;
+    --verde-claro: #4a7c5f;
+    --creme: #f5f0e8;
+    --creme-escuro: #e8e0d0;
+    --dourado: #c9a84c;
+    --dourado-claro: #e8c96d;
+    --texto: #1a1a1a;
+    --texto-suave: #4a4a4a;
+    --branco: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--creme);
+    color: var(--texto);
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--verde);
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -150px; left: -150px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .hero-text { position: relative; z-index: 2; }
+
+  .tag {
+    display: inline-block;
+    border: 1px solid var(--dourado);
+    color: var(--dourado);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 32px;
+    font-weight: 500;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5vw, 68px);
+    color: var(--creme);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--dourado-claro);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.6;
+    margin: 24px 0 48px;
+    font-weight: 300;
+    max-width: 420px;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    background: var(--dourado);
+    color: var(--verde);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 18px 48px;
+    border-radius: 3px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-cta:hover {
+    background: var(--dourado-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(201,168,76,0.3);
+  }
+
+  .preco-hero {
+    margin-top: 20px;
+    color: rgba(245,240,232,0.5);
+    font-size: 14px;
+  }
+
+  .preco-hero strong {
+    color: var(--dourado);
+    font-size: 22px;
+  }
+
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .book-mockup {
+    width: 420px;
+    background: linear-gradient(135deg, #2d5a3d, #1a3a2a);
+    border-radius: 4px 20px 20px 4px;
+    padding: 60px 52px;
+    box-shadow: -12px 0 0 rgba(0,0,0,0.4), 0 50px 100px rgba(0,0,0,0.6), inset -4px 0 8px rgba(0,0,0,0.2);
+    border-left: 8px solid #0d1f16;
+    position: relative;
+    transform: rotate(-3deg);
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: rotate(-3deg) translateY(0); }
+    50% { transform: rotate(-3deg) translateY(-12px); }
+  }
+
+  .book-mockup .book-tag {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dourado);
+    margin-bottom: 28px;
+  }
+
+  .book-mockup h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--creme);
+    font-size: 42px;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .book-mockup h2 em {
+    color: var(--dourado-claro);
+    font-style: italic;
+  }
+
+  .book-mockup p {
+    font-size: 15px;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.6;
+    margin-top: 20px;
+  }
+
+  .book-line {
+    width: 40px;
+    height: 1px;
+    background: var(--dourado);
+    margin: 20px 0;
+    opacity: 0.6;
+  }
+
+  /* ORIGEM */
+  .origem {
+    padding: 100px 80px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--verde-claro);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .origem h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.2;
+    margin-bottom: 40px;
+    color: var(--verde);
+  }
+
+  .origem h2 em {
+    font-style: italic;
+    color: var(--verde-claro);
+  }
+
+  .origem-texto p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--texto-suave);
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .origem-texto p strong {
+    color: var(--texto);
+    font-weight: 500;
+  }
+
+  .destaque-frase {
+    border-left: 3px solid var(--dourado);
+    padding: 24px 32px;
+    margin: 48px 0;
+    background: rgba(201,168,76,0.06);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .destaque-frase p {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--verde);
+    line-height: 1.5;
+    margin: 0 !important;
+  }
+
+  /* O QUE VOCÊ VAI APRENDER */
+  .conteudo {
+    background: var(--verde);
+    padding: 100px 80px;
+  }
+
+  .conteudo-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .conteudo .section-label { color: var(--dourado); }
+
+  .conteudo h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    color: var(--creme);
+    margin-bottom: 60px;
+  }
+
+  .capitulos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .capitulo-item {
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    padding: 32px;
+    transition: border-color 0.3s;
+  }
+
+  .capitulo-item:hover { border-color: rgba(201,168,76,0.5); }
+
+  .cap-numero {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--dourado);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .cap-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--creme);
+    margin-bottom: 12px;
+  }
+
+  .cap-desc {
+    font-size: 14px;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* PARA QUEM É */
+  .para-quem {
+    padding: 100px 80px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .para-quem h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    color: var(--verde);
+    margin-bottom: 48px;
+  }
+
+  .lista-sim {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .lista-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    font-size: 17px;
+    color: var(--texto-suave);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .lista-item .icone {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--verde);
+    color: var(--dourado);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* CTA FINAL */
+  .cta-final {
+    background: var(--verde);
+    padding: 100px 80px;
+    text-align: center;
+  }
+
+  .cta-final h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    color: var(--creme);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .cta-final h2 em {
+    font-style: italic;
+    color: var(--dourado-claro);
+  }
+
+  .cta-final > p {
+    font-size: 18px;
+    color: rgba(245,240,232,0.7);
+    margin-bottom: 56px;
+    font-weight: 300;
+  }
+
+  .preco-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+
+  .preco-de {
+    font-size: 18px;
+    color: rgba(245,240,232,0.5);
+    text-decoration: line-through;
+  }
+
+  .preco-por {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    color: var(--dourado-claro);
+    line-height: 1;
+    font-weight: 700;
+  }
+
+  .preco-desc {
+    font-size: 14px;
+    color: rgba(245,240,232,0.7);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .garantia {
+    margin-top: 24px;
+    font-size: 14px;
+    color: rgba(245,240,232,0.5);
+  }
+
+  /* RODAPÉ */
+  footer {
+    background: var(--verde);
+    padding: 40px 80px;
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: rgba(245,240,232,0.55);
+  }
+
+  /* RESPONSIVO */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding: 60px 32px; text-align: center; }
+    .hero-sub { margin: 24px auto 48px; }
+    .hero-visual { margin-top: 60px; }
+    .origem, .para-quem { padding: 60px 32px; }
+    .conteudo { padding: 60px 32px; }
+    .capitulos { grid-template-columns: 1fr; }
+    .cta-final { padding: 60px 32px; }
+    .preco-box { padding: 40px 48px; }
+    footer { padding: 40px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="tag">E-book · Organização financeira</span>
+    <h1>Mãe que<br><em>Se Vira</em></h1>
+    <p class="hero-sub">Como organizar o salário mínimo, guardar dinheiro e parar de chegar no fim do mês no zero — sem planilha complicada e sem abrir mão de tudo.</p>
+    <a href="#comprar" class="btn-cta">Quero organizar minha vida →</a>
+    <p class="preco-hero">por apenas <strong>R$27</strong> · acesso imediato</p>
+  </div>
+  <div class="hero-visual">
+    <div class="book-mockup">
+      <p class="book-tag">E-book completo</p>
+      <div class="book-line"></div>
+      <h2>Mãe que<br><em>Se Vira</em></h2>
+      <p>Organização financeira para mães com salário mínimo · 6 capítulos · Método das 3 divisões · Desafio de 30 dias</p>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGEM DA MARCA -->
+<section class="origem">
+  <p class="section-label">Por que esse e-book existe</p>
+  <h2>Criado por quem cresceu vendo<br><em>mãe fazer milagre todo mês</em></h2>
+  <div class="origem-texto">
+    <p>Minha mãe criou a gente sozinha. Trabalhava, pagava o que conseguia, atrasava o que precisava atrasar. Sempre devia alguma coisa para o banco, sempre tentava dar o melhor pra mim — mesmo sem condições.</p>
+    <p>Ela não era má administradora. <strong>Ninguém nunca ensinou a ela o que fazer com o dinheiro no momento em que ele entrava.</strong> E aí, ele simplesmente ia embora — antes do fim do mês, sem explicação clara.</p>
+    <p>Eu cresci com isso. E quando fui entender como as finanças realmente funcionam, percebi uma coisa: <strong>não é falta de esforço que faz o dinheiro acabar. É falta de um sistema simples, feito pra quem ganha pouco e tem muito para sustentar.</strong></p>
+    <div class="destaque-frase">
+      <p>"Esse e-book é o que eu gostaria que a minha mãe tivesse tido. Simples, honesto, feito pra vida real."</p>
+    </div>
+    <p>Não tem promessa de enriquecimento. Não tem planilha complicada. Tem um método que funciona com salário mínimo, filho pra criar e conta a pagar — porque foi pensado exatamente para isso.</p>
+  </div>
+</section>
+
+<!-- CONTEÚDO -->
+<section class="conteudo">
+  <div class="conteudo-inner">
+    <p class="section-label">O que você vai aprender</p>
+    <h2>6 capítulos diretos ao ponto</h2>
+    <div class="capitulos">
+      <div class="capitulo-item">
+        <p class="cap-numero">Capítulo 1</p>
+        <p class="cap-titulo">Entendendo seu dinheiro de verdade</p>
+        <p class="cap-desc">Por que o dinheiro some antes do fim do mês — e os 3 vilões invisíveis que ninguém te contou.</p>
+      </div>
+      <div class="capitulo-item">
+        <p class="cap-numero">Capítulo 2</p>
+        <p class="cap-titulo">O método das 3 divisões</p>
+        <p class="cap-desc">A única estratégia que você precisa. Simples, funciona e você consegue aplicar ainda esse mês.</p>
+      </div>
+      <div class="capitulo-item">
+        <p class="cap-numero">Capítulo 3</p>
+        <p class="cap-titulo">Cortando sem sofrimento</p>
+        <p class="cap-desc">Como gastar menos sem abrir mão do que realmente importa. Corte inteligente, não punição.</p>
+      </div>
+      <div class="capitulo-item">
+        <p class="cap-numero">Capítulo 4</p>
+        <p class="cap-titulo">Começando a guardar do zero</p>
+        <p class="cap-desc">Como criar o hábito de poupar mesmo que seja R$30 por mês — e por que isso muda tudo.</p>
+      </div>
+      <div class="capitulo-item">
+        <p class="cap-numero">Capítulo 5</p>
+        <p class="cap-titulo">O plano dos 30 dias</p>
+        <p class="cap-desc">Uma ação por dia para transformar tudo que você aprendeu em rotina real. Sem pressão, só consistência.</p>
+      </div>
+      <div class="capitulo-item">
+        <p class="cap-numero">Capítulo 6</p>
+        <p class="cap-titulo">Seus próximos passos</p>
+        <p class="cap-desc">O que vem depois da reserva — metas, renda extra e os primeiros passos para ir além do salário mínimo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM É -->
+<section class="para-quem">
+  <p class="section-label">Esse e-book é pra você se...</p>
+  <h2>Você se reconhece aqui?</h2>
+  <div class="lista-sim">
+    <div class="lista-item">
+      <span class="icone">✓</span>
+      <span>O salário cai e some antes do dia 20 — e você não sabe explicar pra onde foi</span>
+    </div>
+    <div class="lista-item">
+      <span class="icone">✓</span>
+      <span>Você tenta guardar dinheiro, mas "guardar o que sobra" nunca funciona porque nunca sobra</span>
+    </div>
+    <div class="lista-item">
+      <span class="icone">✓</span>
+      <span>Qualquer imprevisto vira dívida — porque não tem reserva nenhuma para cobrir</span>
+    </div>
+    <div class="lista-item">
+      <span class="icone">✓</span>
+      <span>Você sente que faz tudo certo mas o dinheiro simplesmente não fecha</span>
+    </div>
+    <div class="lista-item">
+      <span class="icone">✓</span>
+      <span>Você quer uma solução simples, sem planilha, sem app complicado, sem curso de 40 horas</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="comprar">
+  <h2>Você já faz milagre<br><em>todo mês.</em></h2>
+  <p>O que faltava era uma estratégia. Agora você tem.</p>
+  <div class="preco-box">
+    <p class="preco-de">R$ 97,00</p>
+    <p class="preco-por">R$27</p>
+    <p class="preco-desc">acesso imediato · e-book completo</p>
+  </div>
+  <a href="https://pay.kiwify.com.br/I4lul18" class="btn-cta">Quero organizar minha vida →</a>
+  <p class="garantia">🔒 Compra segura pela Kiwify · Acesso imediato após o pagamento</p>
+</section>
+
+<footer>
+  <p>Mãe que Se Vira · Organização financeira para mães com salário mínimo</p>
+</footer>
+
+</body>
+</html>
